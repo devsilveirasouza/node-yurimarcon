@@ -1,5 +1,5 @@
 // import { openDb } from './configDB.js';
-import { createTable, insertPessoa, selectPessoa, selectPessoas, updatePessoa } from './controllers/Pessoa.js';
+import { createTable, deletePessoa, insertPessoa, selectPessoa, selectPessoas, updatePessoa } from './controllers/Pessoa.js';
 
 import express from 'express';
 // openDb();
@@ -56,9 +56,19 @@ app.put('/pessoa', function(req, res) {
     // Mostrar os dados da requisição no console
     console.log(req.body);    
 });
-
+// Rota deletePessoa
+app.delete('/pessoa', async function(req, res){
+    // Receber os dados da requisição
+    let pessoa = await deletePessoa(req.body.id);
+    console.log(`O registro foi deletado com sucesso!`);
+    res.json(
+        {
+            "statusCode": 200,
+            "message": `O registro foi deletado com sucesso!`,
+    })    
+});
     // Mostar no console
-    console.log('Iniciando aplicação');
+    console.log('App Initialization!');
     // Ligar o servidor
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

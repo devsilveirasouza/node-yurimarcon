@@ -31,3 +31,10 @@ export async function selectPessoa(id) {
         .then(res=>res);
     });
 }
+
+export async function deletePessoa(id) {
+    return openDb().then(db=>{
+        return db.get('DELETE FROM pessoas WHERE id=?', [id])
+        .then(res=>res);
+    });
+}
