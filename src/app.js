@@ -1,5 +1,5 @@
 // import { openDb } from './configDB.js';
-import { createTable, insertPessoa, selectPessoa, updatePessoa } from './controllers/Pessoa.js';
+import { createTable, insertPessoa, selectPessoa, selectPessoas, updatePessoa } from './controllers/Pessoa.js';
 
 import express from 'express';
 // openDb();
@@ -11,12 +11,19 @@ createTable();
 app.get('/', function(req, res) {
     res.send('Home, Rota Raiz');
 });
+// Rota selectPessoas
+app.get('/pessoas', async function(req, res) {
+    // Receber os dados da requisição
+    let pessoas = await selectPessoas();
+    res.json(pessoas);
+    console.log(pessoas);
+});
 // Rota selectPessoa
 app.get('/pessoa', async function(req, res) {
     // Receber os dados da requisição
-    let pessoas = await selectPessoa();
-    res.json(pessoas);
-    console.log(pessoa);
+    let pessoa = await selectPessoa(req.body.id);
+    res.json(pessoa);
+    // console.log(pessoa);
 });
 // Rota insertPessoa
 app.post('/pessoa', function(req, res) {

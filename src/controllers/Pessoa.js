@@ -18,9 +18,16 @@ export async function updatePessoa(pessoa) {
     });
 }
 
-export async function selectPessoa(pessoa) {
+export async function selectPessoas(pessoa) {
     return openDb().then(db=>{
         return db.all('SELECT * FROM pessoas')
         .then(res=>res)
+    });
+}
+
+export async function selectPessoa(id) {
+    return openDb().then(db=>{
+        return db.get('SELECT * FROM pessoas WHERE id=?', [id])
+        .then(res=>res);
     });
 }
