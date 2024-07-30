@@ -1,5 +1,4 @@
 import { Router } from "express";
-
 import { createTable, deletePessoa, insertPessoa, selectPessoa, selectPessoas, updatePessoa } from './controllers/Pessoa.js';
 
 const router =  Router();
